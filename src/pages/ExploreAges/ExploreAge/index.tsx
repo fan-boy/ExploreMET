@@ -20,7 +20,6 @@ const ExploreAge = () => {
   const [currentObjects, setCurrentObjects] = useState<GetObject[]>([]);
   const [currentObjectIds, setCurrentObjectIds] = useState<number[]>([])
   const [everythingLoading, seteverythingLoading] = useState(true);
-  const [contentLoading, setContentLoading] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
   const [isError, setIsError] = useState(false);
@@ -51,11 +50,12 @@ const ExploreAge = () => {
         setCurrentObjectIds(objectIDsret);
       } else {
         console.error("Failed to fetch search results:", status);
+        setIsError(true)
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
+      setIsError(true);
     } finally {
-      setContentLoading(false);
       seteverythingLoading(false);
     }
   };
@@ -74,7 +74,6 @@ const ExploreAge = () => {
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
-    setContentLoading(true);
   }
   
 
@@ -93,22 +92,22 @@ const ExploreAge = () => {
 
         {everythingLoading && <Loading/>}
 
-        {!everythingLoading && !contentLoading && <div className="w-full p-20">
+        {!everythingLoading && !isError && <div className="w-full p-20">
 
           <div className="w-full  grid grid-cols-3 gap-x-10 gap-y-20">
 
             {currentObjects?.map((i) => (
               <ObjectCard key={i.objectID} object={i} />
             ))}
-
-
-
-
           </div>
 
           <span className="mb-20">
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
           </span>
+        </div>}
+        {isError && 
+        <div className="w-full text-center font-serif text-2xl">
+            Some Error Occured. Please refresh the page
         </div>}
       </div>
     </div>
