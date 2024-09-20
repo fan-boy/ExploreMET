@@ -9,6 +9,7 @@ import Homepage from './pages/homepage';
 import ExploreAll from './pages/ExploreAll';
 import ExploreAges from './pages/ExploreAges';
 import ExploreDepartments from './pages/ExploreDepartments';
+import Age from './pages/ExploreAges/ExploreAge';
 
 //Defining the routes for the app
 
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
     path: "/departments",
     element: <ExploreDepartments/>,
   },
+  {
+    path: "/ages/:age",
+    element: <Age/>,
+  },
+
   {
     path: "*", //catch all
     element: <ExploreDepartments/>,

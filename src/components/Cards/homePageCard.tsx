@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { GetObject } from "../../Handlers/models";
 import Lottie from 'react-lottie';
 import ByAges from './ByAges.png';
+import ExploreAll from './ExploreAll.png';
 import { useNavigate } from 'react-router-dom';
 
 import ByAgesAnimation from '../../pages/homepage/lotties/ExploreAges.json';
+import ExploreAllAnimation from '../../pages/homepage/lotties/ExploreAll.json';
 
  
 
@@ -33,10 +35,10 @@ const HomePageCard = (props:HomePageCardProps) =>{
             image = ByAges;
             break;
         case "ExploreAll":
-            animationData=ByAgesAnimation;
+            animationData=ExploreAllAnimation;
             cardText = "Explore All";
             link = "/explore";
-            image = ByAges;
+            image = ExploreAll;
             break;
             
     }
@@ -61,7 +63,7 @@ const HomePageCard = (props:HomePageCardProps) =>{
       <div className="w-full overflow-hidden bg-gray-200"> 
         
           {!isHovering &&<img
-            src={ByAges}
+            src={image}
             alt={cardText}
             className="w-full h-full object-contain rounded-sm" 
           />}
