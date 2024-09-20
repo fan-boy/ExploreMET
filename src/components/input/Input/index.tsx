@@ -7,6 +7,7 @@ type InputFieldProps = {
   options?: string[];                        // For multiselect dropdown
   onChange: (value: string | string[] | boolean) => void; // Change handler
   style: string,
+  disabled:boolean,
   placeholder?:string
 
 };
@@ -39,6 +40,7 @@ const InputField = (props:InputFieldProps) => {
           value={props.value as string || ''}
           onChange={handleInputChange}
           className={props.style}
+          disabled={props.disabled}
         />
       )}
 
@@ -49,6 +51,7 @@ const InputField = (props:InputFieldProps) => {
           checked={props.value as boolean || false}
           onChange={handleInputChange}
           className={props.style}
+          disabled={props.disabled}
         />
         {props.label &&
       <label className="text-md font-medium">{props.label}</label>}
@@ -60,6 +63,7 @@ const InputField = (props:InputFieldProps) => {
           multiple
           value={selectedOptions}
           onChange={handleMultiSelectChange}
+          disabled={props.disabled}
           className="border border-gray-300 rounded p-2 h-24"
         >
           {props.options?.map((option, index) => (

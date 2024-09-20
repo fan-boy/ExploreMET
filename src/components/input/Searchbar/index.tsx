@@ -8,6 +8,7 @@ interface SearchBarProps{
     onChangeShowOnlyImages: (searchValue:string, showOnlyImages:boolean)=>void;
     onChangeShowOnView:(showIsOnView:boolean) => void
     isSearch: boolean
+    isSearchLoading: boolean
 }
 
 const SearchBar = (props:SearchBarProps)=>{
@@ -46,7 +47,7 @@ const SearchBar = (props:SearchBarProps)=>{
     return(
         <div className="w-full flex flex-col">
         <div className="w-full flex flex-row">
-            <InputField style={"border-2 border-gray-800 dark:border-white rounded-s-md py-2 px-2"} type="text" onChange={onChangeSearchValue} value={searchValue} placeholder="Enter Search Term" /> 
+            <InputField style={"border-2 border-gray-800 dark:border-white rounded-s-md py-2 px-2"} disabled={props.isSearchLoading} type="text" onChange={onChangeSearchValue} value={searchValue} placeholder="Enter Search Term" /> 
             <button className=" py-2 px-2 border-gray-800 border-t-2 border-b-2 border-r-2 dark:border-white hover:bg-gray-800 hover:text-white rounded-e-md" onClick={onClickSearch}>
                 Search
             </button>
@@ -54,8 +55,8 @@ const SearchBar = (props:SearchBarProps)=>{
         </div>
         {props.isSearch &&
         <div className="w-full mt-4 flex flex-row gap-4 items-left text-left">
-            <InputField style={"w-4 h-4"} type="checkbox" label="Artwork with image" onChange={onChangeShowOnlyImages} value={showOnlyImages} placeholder="Enter Search Term" /> 
-            <InputField style={"w-4 h-4"} type="checkbox" label="Is on view" onChange={onChangeOnView} value={showIsOnView}  /> 
+            <InputField style={"w-4 h-4"} type="checkbox" label="Artwork with image" disabled={props.isSearchLoading} onChange={onChangeShowOnlyImages} value={showOnlyImages} placeholder="Enter Search Term" /> 
+            <InputField style={"w-4 h-4"} type="checkbox" label="Is on display" disabled={props.isSearchLoading} onChange={onChangeOnView} value={showIsOnView}  /> 
         </div>   
         }
         </div>

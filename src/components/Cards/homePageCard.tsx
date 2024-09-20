@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { GetObject } from "../../Handlers/models";
 import Lottie from 'react-lottie';
-import ByAges from './ByAges.png';
-import ExploreAll from './ExploreAll.png';
+import ByAges from '../../pages/homepage/ByAges.png';
+import ExploreAll from '../../pages/homepage/ExploreAll.png';
 import { useNavigate } from 'react-router-dom';
 
 import ByAgesAnimation from '../../pages/homepage/lotties/ExploreAges.json';

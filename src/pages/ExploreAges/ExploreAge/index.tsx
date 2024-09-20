@@ -7,6 +7,7 @@ import { GetObject } from "../../../Handlers/models";
 import { SearchHandler } from "../../../Handlers/SearchHandler/SearchHandler";
 import { WebResponseStatus } from "../../../Handlers/WebResponseStatus";
 import { useParams } from 'react-router-dom';
+import Loading from "../../../components/Loading";
 
 const ExploreAge = () => {
 
@@ -90,16 +91,7 @@ const ExploreAge = () => {
 
         
 
-        {everythingLoading && <div className="w-full text-center flex flex-col gap-4">
-
-          <span className="text-3xl font-serif">
-            Some fun fact
-
-          </span>
-          <span className="text-lg ">
-            Loading
-          </span>
-        </div>}
+        {everythingLoading && <Loading/>}
 
         {!everythingLoading && !contentLoading && <div className="w-full p-20">
 

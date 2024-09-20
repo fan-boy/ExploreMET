@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ObjectCard from "../../components/Cards/objectCard";
 
 import SearchBar from "../../components/input/Searchbar";
+import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
 import { GetObject } from "../../Handlers/models";
 import { SearchHandler } from "../../Handlers/SearchHandler/SearchHandler";
@@ -18,7 +19,6 @@ const ExploreAll = () => {
   const [currentObjects, setCurrentObjects] = useState<GetObject[]>([]);
   const [currentObjectIds, setCurrentObjectIds] = useState<number[]>([])
   const [everythingLoading, seteverythingLoading] = useState(true);
-  const [contentLoading, setContentLoading] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
 
   const [isError, setIsError] = useState(false);
@@ -40,7 +40,6 @@ const ExploreAll = () => {
       console.error("Error fetching content:", error);
       setIsError(true);
     } finally {
-      setContentLoading(false);
       seteverythingLoading(false);
     }
   };
@@ -69,12 +68,14 @@ const ExploreAll = () => {
         setCurrentObjectIds(objectIDsret);
       } else {
         console.error("Failed to fetch search results:", status);
+        setIsError(true);
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
+      setIsError(true);
     } finally {
-      setContentLoading(false);
       seteverythingLoading(false);
+
     }
   };
 
@@ -92,7 +93,6 @@ const ExploreAll = () => {
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
-    setContentLoading(true);
   }
   const onChangeShowImageswithArtwork = (searchValue: string, showOnlyImages: boolean) => {
     setshowImageswithArtwork(showOnlyImages);
@@ -116,7 +116,7 @@ const ExploreAll = () => {
       </span>
       <div className="w-2/3">
 
-          <SearchBar onSearch={onSearch} isSearch={isSearch} onChangeShowOnlyImages={onChangeShowImageswithArtwork} onChangeShowOnView={onChangeShowOnView} />
+          <SearchBar onSearch={onSearch} isSearchLoading={everythingLoading} isSearch={isSearch} onChangeShowOnlyImages={onChangeShowImageswithArtwork} onChangeShowOnView={onChangeShowOnView} />
 
         </div>
         </div>
@@ -125,18 +125,9 @@ const ExploreAll = () => {
 
         
 
-        {everythingLoading && <div className="w-full text-center flex flex-col gap-4">
+        {everythingLoading && !isError && <Loading/>}
 
-          <span className="text-3xl font-serif">
-            Some fun fact
-
-          </span>
-          <span className="text-lg ">
-            Loading
-          </span>
-        </div>}
-
-        {!everythingLoading && !contentLoading && <div className="w-full p-20">
+        {!everythingLoading && !isError && <div className="w-full p-20">
 
           <div className="w-full  grid grid-cols-3 gap-x-10 gap-y-20">
 
