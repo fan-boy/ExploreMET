@@ -46,7 +46,7 @@ const Footer = () => {
                     © 2024
                 </span>
                 <span className=" md:text-lg text-md">
-                    Designed and {'<>'} by me 
+                    Designed and {'<>'} by Aaditya Shete 
                 </span>
             </div>
             </div>
