@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9d70ab80.css",
+    "main.js": "/static/js/main.11a202f9.js",
+    "static/js/453.1c65e48a.chunk.js": "/static/js/453.1c65e48a.chunk.js",
+    "static/media/ByAges.png": "/static/media/ByAges.0a72b0d398d8c59bab90.png",
+    "static/media/Contemporary.png": "/static/media/Contemporary.9bd2189f84ce7c771f05.png",
+    "static/media/Rococo.png": "/static/media/Rococo.05ee789b16bc53e056d9.png",
+    "static/media/Renaissance.png": "/static/media/Renaissance.afb2d573b76cdcc805ee.png",
+    "static/media/ExploreAll.png": "/static/media/ExploreAll.d4007216502050158d84.png",
+    "static/media/Baroque.png": "/static/media/Baroque.d2b761a340cbbd0e3dd8.png",
+    "static/media/Romanticism.png": "/static/media/Romanticism.3113ef9bed92fd048a36.png",
+    "static/media/Surrealism.png": "/static/media/Surrealism.e7820a9aaf52d1d4b48d.png",
+    "static/media/Impressionism.png": "/static/media/Impressionism.bd1a19228c6378059b6e.png",
+    "index.html": "/index.html",
+    "main.9d70ab80.css.map": "/static/css/main.9d70ab80.css.map",
+    "main.11a202f9.js.map": "/static/js/main.11a202f9.js.map",
+    "453.1c65e48a.chunk.js.map": "/static/js/453.1c65e48a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d70ab80.css",
+    "static/js/main.11a202f9.js"
+  ]
+}
