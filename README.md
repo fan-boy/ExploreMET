@@ -15,7 +15,9 @@ The most common aproach of exploring art is through the ages. And it's something
 ### Explore All
 Here people can look at everything that the MET has to offer. They can search for specific kinds of work or artists or mediums as well. 
 
-
+## Design 
+I wanted to keep the design as minimal and Artsy as possible. I wanted people to focus more on the Art Work thus have used light background colors and a single primary color for buttons. \
+Use of animations to give more context when you are hovering over an artwork/card is anologus to a user discovering more about the art while standing in front of it in the musuem. 
 
 ## Next Steps
 ̐• Fix wonky animations \
