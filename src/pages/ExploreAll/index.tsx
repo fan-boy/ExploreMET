@@ -123,8 +123,6 @@ const ExploreAll = () => {
 
       <div className="mt-10 gap-20 flex flex-col items-left ">
 
-        
-
         {everythingLoading && !isError && <Loading/>}
 
         {!everythingLoading && !isError && <div className="w-full p-20">
@@ -134,21 +132,19 @@ const ExploreAll = () => {
             {currentObjects?.map((i) => (
               <ObjectCard key={i.objectID} object={i} />
             ))}
-
-
-
-
           </div>
 
           <span className="mb-20">
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
           </span>
         </div>}
+        {isError && 
+        <div className="w-full text-center font-serif text-2xl">
+            Some Error Occured. Please refresh the page
+        </div>}
       </div>
     </div>
   );
-
-
 }
 
 export default ExploreAll;
