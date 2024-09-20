@@ -12,8 +12,8 @@ const DefaultPage =({
     return(
         <>
             <Navbar/>
-            <main className="flex w-screen flex-col bg-bgcolorLight dark:bg-bgColorDark text-fontColorLight dark:text-fontColorDark min-h-screen ">
-              <div className="w-full lg:max-w-8xl flex flex-col text-md md:text-lg">
+            <main className="flex w-full flex-col bg-bgcolorLight dark:bg-bgColorDark text-fontColorLight dark:text-fontColorDark min-h-screen ">
+              <div className="w-full lg:max-w-8xl flex flex-col text-md md:text-lg ">
                 {children}
                 </div>
             </main>

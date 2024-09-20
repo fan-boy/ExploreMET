@@ -8,5 +8,5 @@ export const Departments={
 }
 
 export const Search={
-    getSearch:"https://collectionapi.metmuseum.org/public/collection/v1/search"
+    getSearch:"https://collectionapi.metmuseum.org/public/collection/v1/search?"
 }

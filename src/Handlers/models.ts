@@ -12,6 +12,7 @@ export interface GetObject{
     additionalImages:string[],
     department:string,
     objectName:string,
+    objectDate:string,
     title:string,
     culture:string,
     period:string,
