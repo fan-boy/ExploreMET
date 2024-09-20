@@ -1,6 +1,7 @@
 {
   "name": "exploremet",
   "version": "0.1.0",
+  "homepage": "https://fan-boy.github.io/ExploreMET",
   "private": true,
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
