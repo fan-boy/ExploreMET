@@ -1,6 +1,6 @@
 # Explore the MET Art 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Tailwind CSS](https://tailwindcss.com/)
 
 Explore the website: https://fan-boy.github.io/ExploreMET/
 
@@ -18,8 +18,8 @@ Here people can look at everything that the MET has to offer. They can search fo
 
 
 ## Next Steps
-̐• Fix wonky animations
-• Better Error handling 
+̐• Fix wonky animations \
+• Better Error handling \
 • Loading animations 
 
 
