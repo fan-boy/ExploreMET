@@ -19,7 +19,11 @@ module.exports = {
       'serif':['"Playfair Display"'],
       'navbar':'Quicksand'
     },
-    extend: {},
+    extend: {
+      spacing: {
+        '128': '32rem',
+      }
+    },
   },
   plugins: [],
 }

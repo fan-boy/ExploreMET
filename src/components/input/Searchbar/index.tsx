@@ -53,7 +53,7 @@ const SearchBar = (props:SearchBarProps)=>{
 
         </div>
         {props.isSearch &&
-        <div className="w-full mt-20 flex flex-row gap-4 items-left text-left">
+        <div className="w-full mt-4 flex flex-row gap-4 items-left text-left">
             <InputField style={"w-4 h-4"} type="checkbox" label="Artwork with image" onChange={onChangeShowOnlyImages} value={showOnlyImages} placeholder="Enter Search Term" /> 
             <InputField style={"w-4 h-4"} type="checkbox" label="Is on view" onChange={onChangeOnView} value={showIsOnView}  /> 
         </div>   

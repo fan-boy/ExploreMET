@@ -7,7 +7,7 @@ import { GetObject } from "../../Handlers/models";
 import { SearchHandler } from "../../Handlers/SearchHandler/SearchHandler";
 import { WebResponseStatus } from "../../Handlers/WebResponseStatus";
 
-const ExploreAll = () =>{
+const ExploreAll = () => {
 
   const [searchterm, setSearchTerm] = useState("");
   const [showImageswithArtwork, setshowImageswithArtwork] = useState(false);
@@ -17,14 +17,16 @@ const ExploreAll = () =>{
   const [totalPages, setTotalPages] = useState(1);
   const [currentObjects, setCurrentObjects] = useState<GetObject[]>([]);
   const [currentObjectIds, setCurrentObjectIds] = useState<number[]>([])
-  const [everythingLoading,seteverythingLoading] = useState(true);
+  const [everythingLoading, seteverythingLoading] = useState(true);
   const [contentLoading, setContentLoading] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
+
+  const [isError, setIsError] = useState(false);
 
   const fetchContent = async () => {
     seteverythingLoading(true);
     try {
-      const [status, totalNumber, objects,objectIDs] = await SearchHandler.getAllContent(pageSize, currentPage,currentObjectIds);
+      const [status, totalNumber, objects, objectIDs] = await SearchHandler.getAllContent(pageSize, currentPage, currentObjectIds);
       if (status === WebResponseStatus.OK) {
         const totalNumberofPages = Math.ceil(totalNumber / pageSize);
         setCurrentObjectIds(objectIDs);
@@ -32,32 +34,34 @@ const ExploreAll = () =>{
         setTotalPages(totalNumberofPages);
       } else {
         console.error("Failed to fetch content:", status);
+        setIsError(true);
       }
     } catch (error) {
       console.error("Error fetching content:", error);
+      setIsError(true);
     } finally {
       setContentLoading(false);
       seteverythingLoading(false);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchContent();
-  },[])
+  }, [])
 
-  useEffect(()=>{
-    if(searchterm && searchterm!==""){
+  useEffect(() => {
+    if (searchterm && searchterm !== "") {
       fetchSearchResults(currentObjectIds)
-    }else{
-    fetchContent();
+    } else {
+      fetchContent();
     }
-  },[currentPage])
+  }, [currentPage])
 
-  const fetchSearchResults = async (objectIDs:number[]) => {
+  const fetchSearchResults = async (objectIDs: number[]) => {
     seteverythingLoading(true);
     try {
-      
-      const [status, totalNumber, objects,objectIDsret] = await SearchHandler.searchContent(pageSize, currentPage, searchterm,showImageswithArtwork,showOnViewArtwork,objectIDs);
+
+      const [status, totalNumber, objects, objectIDsret] = await SearchHandler.searchContent(pageSize, currentPage, searchterm, showImageswithArtwork, showOnViewArtwork, objectIDs);
       if (status === WebResponseStatus.OK) {
         const totalNumberofPages = Math.ceil(totalNumber / pageSize);
         setCurrentObjects(objects);
@@ -74,90 +78,84 @@ const ExploreAll = () =>{
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (searchterm) {
       fetchSearchResults([]);
       setCurrentPage(1);
     }
     setIsSearch(true);
-    if(searchterm==""){
+    if (searchterm == "") {
       setIsSearch(false);
     }
 
-  },[searchterm, showImageswithArtwork, showOnViewArtwork])
+  }, [searchterm, showImageswithArtwork, showOnViewArtwork])
 
-  const onPageChange =(page:number)=>{
-    
+  const onPageChange = (page: number) => {
     setCurrentPage(page);
     setContentLoading(true);
-
   }
-const onChangeShowImageswithArtwork = (searchValue:string,showOnlyImages:boolean ) =>{
-  setshowImageswithArtwork(showOnlyImages);
+  const onChangeShowImageswithArtwork = (searchValue: string, showOnlyImages: boolean) => {
+    setshowImageswithArtwork(showOnlyImages);
+  }
 
-}
-
-const onChangeShowOnView =(showIsOnView:boolean) => {
-  setShowOnViewArtwork(showIsOnView);
-}
-  const onSearch =(searchValue:string) =>{
-    
-    
+  const onChangeShowOnView = (showIsOnView: boolean) => {
+    setShowOnViewArtwork(showIsOnView);
+  }
+  const onSearch = (searchValue: string) => {
     setSearchTerm(searchValue)
-    
     seteverythingLoading(true);
   }
 
 
 
-    return(
-        <div className="flex flex-col gap-4 w-full text-center">
-        <span className="text-6xl font-serif w-full text-center mt-14">
-          Explore All
-        </span>
-        <span className="text-xl font-sans">
-          Explore the MET Art collection
-        </span>
+  return (
+    <div className="flex flex-col gap-4 w-full text-center">
+      <div className="w-full flex flex-col gap-10 px-20 mt-20">
+      <span className="text-4xl font-serif w-full text-left ">
+        Explore All
+      </span>
+      <div className="w-2/3">
 
-        <div className="mt-20 gap-20 flex flex-col items-center"> 
-
-        <div className="w-1/2">
-
-        <SearchBar onSearch={onSearch} isSearch={isSearch} onChangeShowOnlyImages={onChangeShowImageswithArtwork} onChangeShowOnView={onChangeShowOnView} />
+          <SearchBar onSearch={onSearch} isSearch={isSearch} onChangeShowOnlyImages={onChangeShowImageswithArtwork} onChangeShowOnView={onChangeShowOnView} />
 
         </div>
+        </div>
 
-        {everythingLoading  && <div className="w-full text-center flex flex-col gap-4">
+      <div className="mt-10 gap-20 flex flex-col items-left ">
 
-        <span className="text-3xl font-serif">
-          Some fun fact
+        
 
-        </span>
-        <span className="text-lg ">
-          Loading
+        {everythingLoading && <div className="w-full text-center flex flex-col gap-4">
+
+          <span className="text-3xl font-serif">
+            Some fun fact
+
           </span>
-          </div>}
-
-       {!everythingLoading && !contentLoading && <div className="w-full p-20">
-
-         <div className="w-full  grid grid-cols-3 gap-x-10 gap-y-20">
-
-         {currentObjects?.map((i) => (
-    <ObjectCard key={i.objectID} object={i} />
-  ))}
-
-          
-        
-        
-        </div> 
-
-        <span className="mb-20">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange}/>
-        </span>
+          <span className="text-lg ">
+            Loading
+          </span>
         </div>}
-        </div> 
+
+        {!everythingLoading && !contentLoading && <div className="w-full p-20">
+
+          <div className="w-full  grid grid-cols-3 gap-x-10 gap-y-20">
+
+            {currentObjects?.map((i) => (
+              <ObjectCard key={i.objectID} object={i} />
+            ))}
+
+
+
+
+          </div>
+
+          <span className="mb-20">
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+          </span>
+        </div>}
       </div>
-    );
+    </div>
+  );
 
 
 }

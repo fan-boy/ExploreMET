@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { GetObject } from "../../Handlers/models";
 import Lottie from 'react-lottie';
 import ByAges from './ByAges.png';
+import { useNavigate } from 'react-router-dom';
 
 import ByAgesAnimation from '../../pages/homepage/lotties/ExploreAges.json';
 
+ 
+
 
 interface HomePageCardProps{
-
-   
-
+    type:string
 }
 
 
@@ -17,24 +18,51 @@ interface HomePageCardProps{
 const HomePageCard = (props:HomePageCardProps) =>{
 
     const[isHovering, setIsHovering] = useState(false);
+    const navigate = useNavigate();
+
+    let animationData=ByAgesAnimation;
+    let cardText = "";
+    let link = "";
+    let image = ByAges;
+
+    switch(props.type){
+        case "ByAges":
+            animationData=ByAgesAnimation;
+            cardText = "By Ages";
+            link = "/ages";
+            image = ByAges;
+            break;
+        case "ExploreAll":
+            animationData=ByAgesAnimation;
+            cardText = "Explore All";
+            link = "/explore";
+            image = ByAges;
+            break;
+            
+    }
 
     const defaultOptions = {
         loop:false, 
         autoplay: true,
-        animationData: ByAgesAnimation,
+        animationData: animationData,
         rendererSettings: {
           preserveAspectRatio: "xMidYMid slice"
         }
       };
 
+
+      const onCardClick = () =>{
+        navigate(link);
+      }
+
     return(
-        <div className="w-full  relative flex flex-col items-start text-left" onMouseEnter={() =>setIsHovering(true)} onMouseLeave={() =>setIsHovering(false)}>
+        <div className="w-2/3  text-2xl hover:text-5xl relative flex flex-col items-start text-left" onMouseEnter={() =>setIsHovering(true)} onMouseLeave={() =>setIsHovering(false)} onClick={onCardClick}>
       {/* Image section */}
       <div className="w-full overflow-hidden bg-gray-200"> 
         
           {!isHovering &&<img
             src={ByAges}
-            alt={"ByAges"}
+            alt={cardText}
             className="w-full h-full object-contain rounded-sm" 
           />}
           {isHovering && <Lottie 
@@ -45,8 +73,8 @@ const HomePageCard = (props:HomePageCardProps) =>{
       </div>
 
       {/* Text section */}
-      <div className="w-full absolute -bottom-20 flex flex-col  text-center mt-2 mb-10">
-        <span className="text-2xl font-serif">By Ages</span>
+      <div className="w-full absolute top-96 flex flex-col  text-center mt-2 mb-10">
+        <span className="font-serif">{cardText}</span>
         
       </div>
     </div>
