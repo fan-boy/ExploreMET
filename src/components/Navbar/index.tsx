@@ -15,12 +15,12 @@ const Navbar =()=>{
                 Aaditya Shete
             </span>
             </ButtonOrLink>
-            {/* <span>
+            <span>
                 {"<>"}
             </span>
             <span>
                 <img src={PacerLogo}  className=" h-4"/>
-            </span> */}
+            </span>
             
             </div>
             <div className="  flex  justify-center sm:items-right justify-right">
